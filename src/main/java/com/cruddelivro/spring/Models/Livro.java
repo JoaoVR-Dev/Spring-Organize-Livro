@@ -3,7 +3,7 @@ package com.cruddelivro.spring.Models;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.UUID;
+import java.util.Date;
 
 //import java.io.Serializable;
 
@@ -13,46 +13,61 @@ import java.util.UUID;
 public class Livro implements Serializable {
     public static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID livroId;
-    @Column(name = "nomeLivro",nullable = false)
-    private String nomeLivro;
-    @Column(name = "nomeAutor", nullable = false)
-    private String nomeAutor;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long livroId;
+    @Column(name = "livroNome", nullable = false)
+    private String livroNome;
 
-    public Livro() {
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Autor livroAutor;
 
-    }
-    public Livro(UUID livroId, String nomeLivro, String nomeAutor) {
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Editora livroEditora;
+
+    @Column(name = "livroLancamento")
+    private Date livroLancamento;
+
+    public Livro(){}
+
+    public Livro(Long livroId, String livroNome, Autor livroAutor, Editora livroEditora, Date livroLancamento) {
         this.livroId = livroId;
-        this.nomeLivro = nomeLivro;
-        this.nomeAutor = nomeAutor;
+        this.livroNome = livroNome;
+        this.livroAutor = livroAutor;
+        this.livroEditora = livroEditora;
+        this.livroLancamento = livroLancamento;
     }
 
-    public String getNomeAutor() {
-        return nomeAutor;
+    public String getLivroNome() {
+        return livroNome;
     }
 
-    public void setNomeAutor(String nomeAutor) {
-        this.nomeAutor = nomeAutor;
+    public void setLivroNome(String livroNome) {
+        this.livroNome = livroNome;
     }
 
-    public String getNomeLivro() {
-        return nomeLivro;
+    public Autor getLivroAutor() {
+        return livroAutor;
     }
 
-    public void setNomeLivro(String nomeLivro) {
-        this.nomeLivro = nomeLivro;
+    public void setLivroAutor(Autor livroAutor) {
+        this.livroAutor = livroAutor;
     }
 
-    public UUID getLivroId() {
-        return livroId;
+    public Editora getLivroEditora() {
+        return livroEditora;
     }
 
-    public void setLivroId(UUID livroId) {
-        this.livroId = livroId;
+    public void setLivroEditora(Editora livroEditora) {
+        this.livroEditora = livroEditora;
     }
 
+    public Date getLivroLancamento() {
+        return livroLancamento;
+    }
 
-
+    public void setLivroLancamento(Date livroLancamento) {
+        this.livroLancamento = livroLancamento;
+    }
 }

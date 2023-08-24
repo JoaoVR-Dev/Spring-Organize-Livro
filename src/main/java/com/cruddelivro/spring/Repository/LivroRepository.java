@@ -6,13 +6,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
-public interface LivroRepository extends JpaRepository<Livro, UUID> {
-    @Query(value = "Select L from Livro L WHERE L.nomeAutor LIKE %:nomeAutor%")
-    List<Livro> findByAutor(String nomeAutor);
+public interface LivroRepository extends JpaRepository<Livro, Long> {
 
-    @Query(value = "Select L from Livro L WHERE L.nomeLivro LIKE %:nomeLivro%")
-    Optional<Livro> findByNome(String nomeLivro);
+    @Query(value = "Select L from Livro L WHERE L.livroNome LIKE %:livroNome%")
+    Optional<Livro> findByNameLivro(String livroNome);
+
+    //@Query(value = "Select L from Livro L WHERE L.nomeLivro LIKE %:nomeLivro%")
+    //Optional<Livro> findByNome(String nomeLivro);
 }
